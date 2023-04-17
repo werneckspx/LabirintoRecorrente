@@ -9,7 +9,7 @@
 # Problema Proposto
 <p align="justify">
   Utilizando o processo de caminhamento aleatorio, nesse projeto o objetivo é caminhar por matrizes NxN, passadas como entrada, iniciando pela posição digitada pelo usuario. O caminho passado será o que for gerado aleatoriamente, sendo possivel caminhar a direita, a esquerda, baixo, cima, diagonais para esquerda e direita para baixo e para cima, apresentando tambem a possibilidade de andar entre as matrizes.<br>
-  Através dessas regras, o objetivo do programa apresentado e consumir o maximo de itens possiveis ate chegar a zerar as possibilidades ou morrer tentando.
+  Através dessas regras, o objetivo do programa apresentado e consumir o maximo de itens possiveis ate chegar a zerar as possibilidades ou morrer tentando. Os valores que sao iguais a # sao paredes, estas impossibilitam o garoto a andar naquela posicao da matriz, ja os que sao iguais a * retiram vida do garoto, e os valores numericos sao itens, que ao serem consumidos em certa quantidade aumentam em 1 a vida do garoto. O garoto inicia o algoritmo com 10 de vida, e ao chegar em 0 o garoto perde.
 </p>
 
 # Lógica
@@ -30,7 +30,13 @@ Dentro da funcao `configDeCaminho()`, foi configurado as acoes permitidas em det
    <div align="center"><img width="300px" src="imgs/caso4.png" /> <br></div>
 6- Linha igual a 0. A imagem abaixo apresenta as unicas possibilidades de movimento.<br>
    <div align="center"><img width="300px" src="imgs/caso5.png" /> <br></div>
-
+Na funcao `movimento()` tambem sao tratadas codicoes importantes, que sao elas: <br>
+-Enquanto o valor da posicao for igual a -1, ao passar de um mapa para outro, sera gerada novas posicoes aleatorias para [x,y] para que o garoto nao caia em uma posicao -1, na qual n e possivel movimentar.<br>
+-Caso o valor da posicao atual for maior que zero, o garoto recebe um ponto para adicionar vida, quando ele receber 4 destes pontos, ele ganha +1 de vida, devido a isso, em seguida e chamada a funcao `altVida()` essa e responsavel para aumentar a vida, e zerar novamente os pontos para adicionar vida quando chega em 4. E retirado 1 do valor da posicao atual, e adicionado aos itens consumidos pelo garoto 1. <br> Caso a condicao acima explicada nao for realizada, ocorre a verificacao se o valor da posicao atual e menor ou igual a -2, caso seja e retirado um do valor da vida, e retirado 1 do valor da posicao atual, e adicionado um ao contador de perigos.<br>
+Depois de realizar todos estes passos a funcao `movimento()` esta finalizada, e o garoto andou pela matriz atual, e caso nao tenha morrido mudou para a proxima matriz em algum momento.<br>
+Para que esse processor nao continue infinitamente caso o garoto nao morra, uma variabel denominada `contZeros` foi criada no arquivo `map.cpp`, essa variavel juntamente com a variavel `soma` no arquivo `ler.cpp`, sao responsaveis por parar o garoto. A `soma` tem guardada a soma da quantidade de posicoes de todas as matrizes juntas. O `contZeros` recebe +1 se o valor da posica atual da matriz na funcao `movimento()` for igual a zero, e recebe zero toda vez que acha um valor maior que zero na posicao da matriz.
+Voltando a funcao `readOneMap()`, se a `contZeros` for diferente de `soma` o algoritmo possibilita a mudanca de matrizes citada acima, se forem iguais o algoritmo e encerrado e retorna os valores de casas percorridas, itens consumidos e perigos enfrentados.<br>
+Apos isso o programa retorna ao `ler.cpp` e chama a funcao `casasInexploradas()`, essa e responsavel por verificar as casas inexploradas depois que o garoto ja terminou de andar, ela le o arquivo `input.data` e quando termina a leitura da matriz atual, salvando a matriz, chama a funcao `lerComparacao()`, essa funcao e responsavel em abrir os arquivos `inputX.data` onde X e o valor recebido pelo contador na iteracao atual, le a matriz do arquivo e a salva. Apos ter as duas matrizes salvas ocorre a verificacao das suas posicoes, quando apresentam valor igual em posicoes iguais, o contador de casas inexploradas recebe +1. Apos finalizar esse processo para todas as matrizes, retorna a quantied de casas inexploradas.<br>
 
    
    
