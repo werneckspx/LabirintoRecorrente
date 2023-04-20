@@ -42,19 +42,23 @@ Apos isso o programa retorna ao `ler.cpp` e chama a funcao `casasInexploradas()`
    
    
 Para o caso em que o arquivo de entrada tivesse apenas um '\n' ao final, a leitura do arquivo considerava essa última linha já como o final do arquivo, o que interrompia o loop de leitura e não permitia que a última matriz fosse percorrida(não entrava no else). Para resolver este problema, foi criado um booleano `decisao` que é responsável por tomar a decisão se a última matriz salva já foi percorrida ou não. Este booleano é iniciado com false, e recebe falso toda vez que uma linha é tokenizada. O true só é atribuído à variável no else, que é onde as matrizes são percorridas.<br>
-Então, por meio de um if após o loop de leitura, no caso onde o input do programa tivesse dois '\n', a variável booleana iria impedir a matriz de ser caminhada duas vezes, e no caso de apenas um '/n', ela seria percorrida dentro do if, finalizando o percorrimento de todas as matrizes corretamente.<br>
+Então, por meio de um if após o loop de leitura, no caso onde o input do programa tivesse dois '\n', a variável booleana iria impedir a matriz de ser caminhada duas vezes, e no caso de apenas um '\n', ela seria percorrida dentro do if, finalizando o percorrimento de todas as matrizes corretamente.<br>
 
  # Resultados 
    Considerando a lógica e a descrição do problema acima, os resultados esperados durante a leitura do arquivo com 3 matrizes 7x7:<br><br>
-   <img width="300px" src="imgs/resultados1.png" />
-   <img width="300px" src="imgs/resultados2.png" />
-   <img width="300px" src="imgs/resultados3.png" />
+   <img width="232px" src="imgs/resultados1.jpeg" />
+   <img width="255px" src="imgs/resultados2.jpeg" />
+   <img width="300px" src="imgs/resultados3.jpeg" />
    
  > OBS:
    Todas as matrizes apresentaram o mesmo padrão de resultado, ao finalizar os processos, irá retornar as casas percorridas pelo labirinto, a soma dos itens consumidos, a soma da quantidade de perigos enfrentados e as casas inexploradas.<br>
-   
+ # Custo computacional
+  O desafio apresentado precisa de operacoes aleatorias, portanto nao e possivel fazer uma analise precisa em relacao ao seu custo. Entretando a casos que podem ocorrer que sao calculaveis, por exemplo:<br>
+   O algoritmo tera custo linear(n) caso o garoto passe pelas mesmas posicoes sempre.<br>
+   O algoritmo tera custo quadratico(n2) caso o garoto passe por todas as posicoes possiveis.<br>
+   O algoritmo realizado apresenta poucas estruturas de repeticao de custo (n2), uma vez que a forma de gerar o caminho aleatorio nao apresenta custo (n2), pode-se dizer que o custo bom frente ao problema, podendo apresentar custo entre (n)=<f(n)<=(n2).<br>
  # Conclusao
- 
+  Frente ao problema de caminhamento aleatorio por matrizes, o algoritmo realiza todas as funcoes necessarias para soluciona-lo. Todos os casos de excessoes e problemas descritos tambem foram tratados de forma clara e objetiva. Os resultados apresentados estao dentro do esperado, retornando valores condisentes ao esperado. A logica abre espaco para aperfeicoamento em trabalhos futuros, podendo utilizar metodos com melhor custo computacional para a resolucao deste problema.
  # Bibliotecas 
 <p>Para o funcionamento do programa, é necessário incluir as seguintes bibliotecas: 
 <ul>
