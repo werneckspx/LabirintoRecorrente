@@ -82,7 +82,7 @@ Então, por meio de um if após o loop de leitura, no caso onde o input do progr
 
    O algoritmo terá custo quadrático(n2) caso o garoto passe por todas as posições possíveis.<br> 
 
-   O algoritmo realizado apresenta poucas estruturas de repetição de custo (n2), uma vez que a forma de gerar o caminho aleatório não apresenta custo (n2), pode-se dizer que o custo é aceitável frente ao problema, podendo apresentar custo entre (n)=<f(n)<=(n2).<br> 
+   O algoritmo realizado apresenta poucas estruturas de repetição de custo (n2), uma vez que a forma de gerar o caminho aleatório não apresenta custo (n2), pode-se dizer que o custo é aceitável frente ao problema.<br> 
 
 # Conclusão 
 
