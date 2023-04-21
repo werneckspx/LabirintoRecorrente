@@ -11,7 +11,7 @@ void read()
     bool decisao = false;
     int count = 0, soma;
     srand(time(NULL));
-    int vida = 10, mochila = 0, contCasasPercorridas = 0, contPerigos = 0, contCasasInexploradas = 0, maisVida = 0, numMat;
+    int numMat;
 
     if (!input_file.is_open())
     {

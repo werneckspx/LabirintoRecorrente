@@ -5,7 +5,9 @@ void readOneMap(vector<vector<int>> mat, int tam, int numMat, int soma)
     string arq, loc;
     string num, line;
     vector<int> n;
-    int vida = 10, mochila = 0, contCasasPercorridas = 0, contPerigos = 0, maisVida = 0, count = 0, i, j, contZero = 0, itensConsumidos = 0;
+    bool fin=false,aux=true;
+    int vida = 10, contCasasPercorridas = 0, contPerigos = 0, maisVida = 0, count = 0, i, j, contZero = 0, itensConsumidos = 0;
+    int fim_i,fim_j;
     cout << "Bem vindo ao game LABIRINTO RECORRENTE!!!" << endl;
     cout << "Teste sua sorte digitando a posicao que ira comecar!" << endl;
     cin >> i;
@@ -36,19 +38,29 @@ void readOneMap(vector<vector<int>> mat, int tam, int numMat, int soma)
                 else
                 {
                     cout << endl;
-                    imprimindo(mat);
-                    movimento(mat, i, j, tam, &vida, &mochila, &contCasasPercorridas, &contPerigos, &maisVida, count, &contZero, soma, &itensConsumidos);
                     
-                    count++;
-                    if (contZero != soma)
+                    while (mat[i][j] == -1)
                     {
-                        if (count == numMat && vida != 0 && contZero != soma)
-                        {
-                            cout<<"Voltando ao mapa 0! Nivel de dificuldade aumentado! "<<endl;
-                            count = 0;
-                        }
+                        i = rand() % tam;
+                        j = rand() % tam;
                     }
+                    if (mat[i][j]!= -1 && aux==true)
+                    {
+                        fim_i=i;
+                        fim_j=j;
+                        aux=false;
+                    }
+                    imprimindo(mat);
+                    movimento(mat, i, j, tam, &vida, &contCasasPercorridas, &contPerigos, &maisVida, &count, &contZero, soma, &itensConsumidos,&fin,fim_i,fim_j);
+                    cout<<fin<<endl;
+                    count++;
                     
+                    if (count == numMat && vida != 0)
+                    {
+                        cout<<"Voltando ao mapa 0! Nivel de dificuldade aumentado! "<<endl;
+                        count = 0;
+                    }
+                                        
                     cout << endl;
 
                     mat.clear();
@@ -56,6 +68,11 @@ void readOneMap(vector<vector<int>> mat, int tam, int numMat, int soma)
             }
         }
         input_file.close();
+        if (fin==true)
+        {
+            break;
+        }
+        
     }
 
     cout<<"Casas percorridos pelo labirinto: "<<contCasasPercorridas<<endl;
@@ -95,24 +112,26 @@ void imprimindo(vector<vector<int>> mat)
     cout << endl;
 }
 
-void movimento(vector<vector<int>> mat, int linha, int coluna, int tam, int *vida, int *mochila,
-               int *contCasasPercorridas, int *contPerigos, int *maisVida, int count, int *contZero, int soma, int *itensConsumidos)
+void movimento(vector<vector<int>> mat, int linha, int coluna, int tam, int *vida,
+               int *contCasasPercorridas, int *contPerigos, int *maisVida, int *count, int *contZero, int soma, int *itensConsumidos,bool *fin,
+               int fim_i, int fim_j)
 {
 
     int aleatorio, i, j;
     i = linha;
     j = coluna;
-
+    
     cout << "CAMINHO PERCORRIDO" << endl;
-    while (*vida != 0 && *contZero != soma)
+    while (*vida != 0)
     {
         *contCasasPercorridas = *contCasasPercorridas + 1;
-        while (mat[i][j] == -1)
+        if (*contZero>=soma && *count==0 && i==fim_i && j==fim_j)
         {
-            i = rand() % tam;
-            j = rand() % tam;
+            cout<<"Posicao atual:"<<i<<" "<<j<<" || Posicao inicial:"<<fim_i<<" "<<fim_j<<endl;
+            cout << "Vida: " << *vida << endl;
+            *fin=true;
+            return;
         }
-
         configDeCaminho(&aleatorio, i, j, tam);
         if (*vida == 0)
         {
@@ -142,7 +161,7 @@ void movimento(vector<vector<int>> mat, int linha, int coluna, int tam, int *vid
         cout << "Mais Vida: " << *maisVida << endl;
         if (aleatorio == 10)
         {
-            criarMap(mat, count);
+            criarMap(mat, *count);
             return;
         }
         selecionandoCaminho(aleatorio, &i, &j, mat);

@@ -15,8 +15,9 @@ void readOneMap(vector<vector<int>> mat, int tam, int numMat, int soma);
 
 void imprimindo(vector<vector<int>> mat);
 
-void movimento(vector<vector<int>> mat, int linha, int coluna, int tam, int *vida, int *mochila,
-               int *contCasasPercorridas, int *contPerigos, int *maisVida, int count, int *contZero, int soma, int *itensConsumidos);
+void movimento(vector<vector<int>> mat, int linha, int coluna, int tam, int *vida,
+               int *contCasasPercorridas, int *contPerigos, int *maisVida, int *count, int *contZero, int soma, int *itensConsumidos,bool *fin,
+               int fim_i, int fim_j);
 
 void configDeCaminho(int *aleatorio, int i, int j, int tam);
 
