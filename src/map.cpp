@@ -42,7 +42,7 @@ void readOneMap(vector<vector<int>> mat, int tam, int numMat, int soma)
                     while (mat[i][j] == -1)
                     {
                         i = rand() % tam;
-                        j = rand() % tam;
+                        j = rand() % tam-1;
                     }
                     if (mat[i][j]!= -1 && aux==true)
                     {
